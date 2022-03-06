@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "toolchanger_deploy_config",
+            "type": "shell",
+            "command": "rsync -iahp ./klipper-config/* pi@toolchanger.local:/home/pi/klipper_config/",
+            "problemMatcher": []
+        },
+        {
+            "label": "toolchanger_restart_klipper",
+            "type": "shell",
+            "command": "ssh pi@toolchanger.local 'sudo service klipper restart'",
+            "problemMatcher": []
+        },
+        {
+            "label": "Toolchanger Deploy & Restart",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "toolchanger_deploy_config",
+                "toolchanger_restart_klipper"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
